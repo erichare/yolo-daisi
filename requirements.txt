@@ -1,0 +1,13 @@
+# Automatically generated PIP requirements
+tqdm
+numpy
+addict
+opencv-python
+Pillow
+pycocotools
+PyYAML
+streamlit
+thop
+tools
+torch
+torchvision
