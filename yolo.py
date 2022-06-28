@@ -30,7 +30,7 @@ def yolo(source: pd.DataFrame="cat.jpeg"):
     print(my_uuid)
     print(source)
     inferer = Inferer(source, weights, device="", yaml="coco.yaml", 
-                      img_size=640, half=False)
+                      img_size=1280, half=False)
     inferer.infer(conf_thres=.25, iou_thres=.45, classes=None, 
                   agnostic_nms=False, max_det=1000, save_dir=tmpdir, 
                   save_txt=True, save_img=True, hide_labels=False, hide_conf=False)
