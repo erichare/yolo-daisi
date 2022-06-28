@@ -21,9 +21,10 @@ def yolo(source: pd.DataFrame="cat.jpeg"):
     if not source:
         source = "cat.jpeg"
     elif type(source) != str:
-        source_path = os.path.join(tmpdir, str(uuid.uuid4()) + ".png")
-        with open(source_path, mode='w') as f:
-            print(source.getvalue(), file=f)
+        print(source.name)
+        source_path = os.path.join(tmpdir, source.name)
+        with open(source_path, mode='wb') as f:
+             f.write(source.getbuffer())
         source = source_path
 
     print(my_uuid)
@@ -49,4 +50,4 @@ if __name__ == "__main__":
     print(uploaded_file)
     res = yolo(uploaded_file)
 
-    st.markdown(res["data"]["src"], unsafe_allow_html=True)
+    st.markdown(res[0]["data"]["src"], unsafe_allow_html=True)
