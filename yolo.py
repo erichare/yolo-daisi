@@ -50,4 +50,4 @@ if __name__ == "__main__":
     print(uploaded_file)
     res = yolo(uploaded_file)
 
-    st.markdown(res[0]["data"]["src"], unsafe_allow_html=True)
+    st.markdown('<img src="' + res[0]["data"]["src"] + '"/>', unsafe_allow_html=True)
