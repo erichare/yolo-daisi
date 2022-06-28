@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+import pandas as pd
 import tempfile
 import uuid
 import base64
@@ -15,7 +16,7 @@ tmp_path = os.path.join(tmpdir, "labels")
 if not os.path.exists(tmp_path):
     os.makedirs(tmp_path)
 
-def yolo(source="cat.jpeg"):
+def yolo(source: pd.DataFrame="cat.jpeg"):
     if not source:
         source = "cat.jpeg"
 
