@@ -1,3 +1,4 @@
+from io import StringIO
 import os
 import streamlit as st
 import pandas as pd
@@ -19,6 +20,11 @@ if not os.path.exists(tmp_path):
 def yolo(source: pd.DataFrame="cat.jpeg"):
     if not source:
         source = "cat.jpeg"
+    elif not os.path.exists(source):
+        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
+        source = os.path.join(tmpdir, str(uuid.uuid4() + ".png"))
+        with open(source, mode='w') as f:
+            print(stringio.getvalue(), file=f)
 
     print(my_uuid)
     print(source)
