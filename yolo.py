@@ -21,10 +21,10 @@ def yolo(source: pd.DataFrame="cat.jpeg"):
     if not source:
         source = "cat.jpeg"
     elif type(source) != str:
-        stringio = StringIO(uploaded_file.getvalue().decode("utf-8"))
-        source = os.path.join(tmpdir, str(uuid.uuid4() + ".png"))
-        with open(source, mode='w') as f:
-            print(stringio.getvalue(), file=f)
+        source_path = os.path.join(tmpdir, str(uuid.uuid4() + ".png"))
+        with open(source, mode='wb') as f:
+            print(source.getvalue(), file=f)
+        source = source_path
 
     print(my_uuid)
     print(source)
