@@ -22,7 +22,7 @@ def yolo(source: pd.DataFrame="cat.jpeg"):
         source = "cat.jpeg"
     elif type(source) != str:
         source_path = os.path.join(tmpdir, str(uuid.uuid4()) + ".png")
-        with open(source_path, mode='wb') as f:
+        with open(source_path, mode='w') as f:
             print(source.getvalue(), file=f)
         source = source_path
 
