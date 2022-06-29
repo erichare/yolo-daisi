@@ -1,31 +1,46 @@
-from io import StringIO
+import scipy
 import os
 import streamlit as st
-import pandas as pd
+import numpy as np
 import tempfile
 import uuid
 import base64
 
 from PIL import Image
+from io import BytesIO
 
 from yolov6.core.inferer import Inferer
 
 weights = "yolov6s.pt"
 my_uuid = str(uuid.uuid4())
+
 tmpdir = os.path.join(tempfile.gettempdir(), my_uuid)
 tmp_path = os.path.join(tmpdir, "labels")
+
 if not os.path.exists(tmp_path):
     os.makedirs(tmp_path)
 
-def yolo(source: pd.DataFrame="cat.jpeg"):
-    if not source:
-        source = "cat.jpeg"
-    elif type(source) != str:
-        print(source.name)
-        source_path = os.path.join(tmpdir, source.name)
-        with open(source_path, mode='wb') as f:
-             f.write(source.getbuffer())
-        source = source_path
+def yolo(image: np.ndarray=None):
+    source_name = str(uuid.uuid4()) + ".jpg"
+    if hasattr(image, "name"):
+        source_name = image.name
+
+    if not image:
+        image = scipy.misc.face().astype(np.float32)
+
+    if type(image) == np.ndarray:
+        img_crop_pil = Image.fromarray(image)
+        if img_crop_pil.mode != 'RGB':
+            img_crop_pil = img_crop_pil.convert('RGB')
+
+        image = BytesIO()
+        img_crop_pil.save(image, format="jpeg")        
+        
+    # Streamlit
+    source_path = os.path.join(tmpdir, source_name)
+    with open(source_path, mode='wb') as f:
+        f.write(image.getbuffer())
+    source = source_path
 
     print(my_uuid)
     print(source)
