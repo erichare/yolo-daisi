@@ -27,7 +27,7 @@ def yolo(image: np.ndarray=None):
         source_name = image.name
 
     if not image:
-        image = scipy.misc.face().astype(np.float32)
+        image = scipy.misc.face(gray=True).astype(np.float32)
 
     if type(image) == np.ndarray:
         img_crop_pil = Image.fromarray(image)
