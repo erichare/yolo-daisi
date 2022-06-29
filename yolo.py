@@ -26,7 +26,7 @@ def yolo(image: np.ndarray=None):
     if hasattr(image, "name"):
         source_name = image.name
 
-    if not image:
+    if image is None:
         image = scipy.misc.face(gray=True).astype(np.float32)
 
     if type(image) == np.ndarray:
