@@ -25,7 +25,7 @@ We simply convert it to a Numpy array and call the Daisi
 ```python
 img = Image.open("cat.jpeg")
 img.load()
-img_data = np.asarray(img, dtype="int32")
+img_data = np.asarray(img, dtype="uint8")
 
 yolo_result = yolo_object_detection.yolo(img_data).value
 ```
