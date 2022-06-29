@@ -38,12 +38,11 @@ def yolo(image: np.ndarray=None):
         img_crop_pil.save(image, format="jpeg")        
         
     # Streamlit
-    if type(image) == BytesIO:
-        source_path = os.path.join(tmpdir, source_name)
-        with open(source_path, mode='wb') as f:
+    source = os.path.join(tmpdir, source_name)
+    if hasattr(image, "getbuffer"):
+        with open(source, mode='wb') as f:
             f.write(image.getbuffer())
-        source = source_path
-    elif type(image) == str:
+    else:
         source = image
 
     print(my_uuid)
