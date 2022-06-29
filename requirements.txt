@@ -6,6 +6,7 @@ opencv-python
 Pillow
 pycocotools
 PyYAML
+scipy
 streamlit
 thop
 tools
