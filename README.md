@@ -6,6 +6,8 @@ First, we simply load the PyDaisi package:
 
 ```python
 import pydaisi as pyd
+import numpy as np
+from PIL import Image
 ```
 
 Next, we connect to the Daisi:
@@ -18,8 +20,14 @@ Now, let's use this image of a cat:
 
 ![](cat.jpeg)
 
+We simply convert it to a Numpy array and call the Daisi
+
 ```python
-yolo_result = yolo_object_detection.yolo(source="cat.jpeg").value
+img = Image.open("cat.jpeg")
+img.load()
+img_data = np.asarray(img, dtype="int32")
+
+yolo_result = yolo_object_detection.yolo(img_data).value
 ```
 
 And finally, let's render the base64 encoded image!
