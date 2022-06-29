@@ -6,6 +6,7 @@ import tempfile
 import uuid
 import base64
 
+from scipy import misc
 from PIL import Image
 from io import BytesIO
 
