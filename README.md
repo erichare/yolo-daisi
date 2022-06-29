@@ -1,4 +1,4 @@
-# Serverless Principal Components Analysis with Daisies
+# Serverless Yolo v6 Object Detection with Daisies
 
 ## How to Call
 
@@ -11,21 +11,28 @@ import pydaisi as pyd
 Next, we connect to the Daisi:
 
 ```python
-principal_components_analysis = pyd.Daisi("erichare/Principal Components Analysis")
+yolo_object_detection = pyd.Daisi("erichare/YOLO Object Detection")
 ```
 
-Now, let's get the PCA data:
+Now, let's use this image of a cat:
+
+![](cat.jpeg)
 
 ```python
-pca_data = principal_components_analysis.fit_pca(df=None, vars=None, n_components=2).value
+yolo_result = yolo_object_detection.yolo(source="cat.jpeg").value
 ```
 
-And finally, let's plot it!
+And finally, let's render the base64 encoded image!
 
 ```python
-principal_components_analysis.plot_pca(pca_data, x_component=1, y_component=2, split_by="Variety").value
+import base64
+with open("cat-objects.jpeg", 'wb') as f:
+    imgdata = base64.b64decode(yolo_result[0]["data"]["src"][23:])
+    f.write(imgdata)
 ```
+
+![](cat-objects.jpeg)
 
 ## Running the Streamlit App
 
-Or, we can automate everything by just [Running the Streamlit App](https://dev3.daisi.io/daisies/3504c0f1-10d7-47b3-a2f0-e79f81178ed9/streamlit)
+Or, we can automate everything by just [Running the Streamlit App](https://dev3.daisi.io/daisies/227961c0-e3e6-4e41-927c-871a907592cb/streamlit)
