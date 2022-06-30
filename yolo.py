@@ -85,7 +85,7 @@ def yolo(image: np.ndarray=None, return_type: list=["Image", "Labels"]):
         source_base = os.path.basename(source)
         source_root, file_extension = os.path.splitext(source_base)
         label_result = pd.read_csv(os.path.join(tmpdir, "labels", source_root + ".txt"), sep=" ", header=None)
-        label_result.columns = ["label", "x", "y", "width", "height", "other"]
+        label_result.columns = ["label", "x", "y", "width", "height", "confidence"]
         
         with open("coco.yaml", 'r') as stream:
             coco = yaml.safe_load(stream)
@@ -94,7 +94,7 @@ def yolo(image: np.ndarray=None, return_type: list=["Image", "Labels"]):
         name_mapping.columns = ["label", "label_name"]
 
         label_result = label_result.merge(name_mapping, how='inner', left_on=['label'], right_on=['label'])
-        label_result = label_result[["label_name", "x", "y", "width", "height"]]
+        label_result = label_result[["label_name", "x", "y", "width", "confidence"]]
 
 
     if len(return_type) == 2:
