@@ -72,5 +72,5 @@ if __name__ == "__main__":
 
     result_image = yolo(uploaded_file)
 
-    st.image(result_image, caption='Original Image')
+    st.image(uploaded_file, caption='Original Image')
     st.image(result_image, caption='Objects Detected')
