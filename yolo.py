@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import tempfile
 import uuid
+import yaml
 
 from PIL import Image
 
@@ -84,6 +85,17 @@ def yolo(image: np.ndarray=None, return_type: list=["Image", "Labels"]):
         source_base = os.path.basename(source)
         source_root, file_extension = os.path.splitext(source_base)
         label_result = pd.read_csv(os.path.join(tmpdir, "labels", source_root + ".txt"), sep=" ", header=None)
+        label_result.columns = ["label", "x1", "x2", "y1", "y2", "width"]
+        
+        with open("coco.yaml", 'r') as stream:
+            coco = yaml.safe_load(stream)
+
+        name_mapping = pd.DataFrame([(i, x) for i, x in enumerate(coco["names"])])
+        name_mapping.columns = ["label", "label_name"]
+
+        label_result = label_result.merge(name_mapping, how='inner', left_on=['label'], right_on=['label'])
+        label_result = label_result[["label_name", "x", "y", "width", "height"]]
+
 
     if len(return_type) == 2:
         return yolo_result, label_result
