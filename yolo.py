@@ -19,6 +19,19 @@ if not os.path.exists(tmp_path):
     os.makedirs(tmp_path)
 
 def yolo(image: np.ndarray=None, return_type: list=["Image", "Labels"]):
+    '''
+    Run the YOLOv6 Object Detection Algorithm on an image
+    
+    This function takes an image as either a PIL image, or a Numpy array,
+    and returns either a new image with the bounding boxes of detected
+    objects overlayed, and/or a dataframe containing the labeling info
+    that is derived from the algorithm
+
+    :param image np.ndarray: The image to analyze
+    :param return_type list: The list of things to return
+    
+    :return: Results of the Yolo Algorithm
+    '''
     # Get a name for the image
     source_name = str(uuid.uuid4()) + ".jpg"
     if hasattr(image, "name"):
@@ -108,7 +121,7 @@ if __name__ == "__main__":
         prefix = "result"
         suffix = ""
 
-    with st.expander("Inference with PyDaisi"):
+    with st.expander("Inference with PyDaisi", expanded=True):
         st.markdown(f"""
         ```python
         import pydaisi as pyd
