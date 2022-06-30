@@ -139,7 +139,7 @@ if __name__ == "__main__":
         import pydaisi as pyd
         from PIL import Image
 
-        yolo_object_detection = pyd.Daisi("erichare/YOLO Object Detection")
+        yolo_object_detection = pyd.Daisi("erichare/YOLO v6 Object Detection")
 
         img = Image.open("{file_name}")
         img.load()
