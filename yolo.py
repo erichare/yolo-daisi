@@ -94,7 +94,7 @@ def yolo(image: np.ndarray=None, return_type: list=["Image", "Labels"]):
         name_mapping.columns = ["label", "label_name"]
 
         label_result = label_result.merge(name_mapping, how='inner', left_on=['label'], right_on=['label'])
-        label_result = label_result[["label_name", "x", "y", "width", "confidence"]]
+        label_result = label_result[["label_name", "x", "y", "width", "height", "confidence"]]
 
 
     if len(return_type) == 2:
