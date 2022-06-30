@@ -47,7 +47,7 @@ def yolo(image: np.ndarray=None):
 
     # Resize the image to the max dimensions
     new_width  = 768
-    new_height = new_width * image.size[1] / image.size[0] 
+    new_height = int(new_width * image.size[1] / image.size[0])
     image = image.resize((new_width, new_height), Image.ANTIALIAS)
 
     # Write the image
