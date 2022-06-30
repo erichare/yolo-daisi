@@ -70,8 +70,33 @@ if __name__ == "__main__":
     st.title("Yolo V6 Model")
 
     st.write("This Daisi allows you to provide an image, and one of the most advanced Object Detection algorithms available will try to classify it for you. Upload your data to get started!")
+    
     with st.sidebar:
         uploaded_file = st.file_uploader("Choose an Image", type=["png","jpg","jpeg"])
+
+    if not uploaded_file:
+        file_name = "busystreet.png"
+    else:
+        file_name = uploaded_file.name
+
+    with st.expander("Show PyDaisi Code"):
+        st.markdown('## Calling with PyDaisi')
+        st.markdown(f"""
+        ```python
+        import pydaisi as pyd
+        from PIL import Image
+
+        yolo_object_detection = pyd.Daisi("erichare/YOLO Object Detection")
+
+        img = Image.open("{file_name}")
+        img.load()
+
+        original_image, result_image = yolo_object_detection.yolo(img).value
+
+        original_image.show()
+        result_image.show()
+        ```
+        """)
 
     original_image, result_image = yolo(uploaded_file)
 

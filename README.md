@@ -6,7 +6,6 @@ First, we simply load the PyDaisi and supporting packages:
 
 ```python
 import pydaisi as pyd
-import numpy as np
 from PIL import Image
 ```
 
