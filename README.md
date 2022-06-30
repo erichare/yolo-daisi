@@ -26,16 +26,14 @@ We simply convert it to a Numpy array and call the Daisi
 img = Image.open("busystreet.png")
 img.load()
 
-yolo_result = yolo_object_detection.yolo(img).value
+original_image, result_image = yolo_object_detection.yolo(img).value
 ```
 
-And finally, let's render the base64 encoded image!
+And finally, let's render the images!
 
 ```python
-import base64
-with open("cat-objects.jpeg", 'wb') as f:
-    imgdata = base64.b64decode(yolo_result[0]["data"]["src"][23:])
-    f.write(imgdata)
+original_image.show()
+result_image.show()
 ```
 
 ![](cat-objects.jpeg)
