@@ -94,6 +94,20 @@ if __name__ == "__main__":
     else:
         file_name = uploaded_file.name
 
+    prefix = "yolo_result, label_result"
+    suffix = """yolo_result.show()
+        label_result
+    """
+    if len(return_types) == 1 and "Image" in return_types:
+        prefix = "yolo_result"
+        suffix = "yolo_result.show()"
+    elif len(return_types) == 1 and "Labels" in return_types:
+        prefix = "label_result"
+        suffix = "label_result"
+    elif len(return_types) == 0:
+        prefix = "result"
+        suffix = ""
+
     with st.expander("Inference with PyDaisi"):
         st.markdown(f"""
         ```python
@@ -105,8 +119,9 @@ if __name__ == "__main__":
         img = Image.open("{file_name}")
         img.load()
 
-        yolo_result = yolo_object_detection.yolo(img).value
-        yolo_result.show()
+        {prefix} = yolo_object_detection.yolo(img, return_type={return_types}).value
+        
+        {suffix}
         ```
         """)
 
