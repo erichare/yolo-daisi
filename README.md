@@ -2,7 +2,7 @@
 
 ## How to Call
 
-First, we simply load the PyDaisi package:
+First, we simply load the PyDaisi and supporting packages:
 
 ```python
 import pydaisi as pyd
@@ -16,18 +16,17 @@ Next, we connect to the Daisi:
 yolo_object_detection = pyd.Daisi("erichare/YOLO Object Detection")
 ```
 
-Now, let's use this image of a cat:
+Now, let's use this image of a busy street:
 
-![](cat.jpeg)
+![](busystreet.png)
 
 We simply convert it to a Numpy array and call the Daisi
 
 ```python
-img = Image.open("cat.jpeg")
+img = Image.open("busystreet.png")
 img.load()
-img_data = np.asarray(img, dtype="uint8")
 
-yolo_result = yolo_object_detection.yolo(img_data).value
+yolo_result = yolo_object_detection.yolo(img).value
 ```
 
 And finally, let's render the base64 encoded image!
