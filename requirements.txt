@@ -1,14 +1,12 @@
-# Automatically generated PIP requirements
-tqdm
-numpy
-addict
-opencv-python
-Pillow
-pycocotools
-PyYAML
-scipy # token commit
-streamlit
-thop
-tools
-torch
+opencv_python
 torchvision
+torch
+numpy
+thop
+streamlit
+pycocotools
+tqdm
+addict
+Pillow
+PyYAML
+tools

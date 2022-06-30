@@ -19,23 +19,22 @@ Now, let's use this image of a busy street:
 
 ![](busystreet.png)
 
-We simply convert it to a Numpy array and call the Daisi
+We simply load the Image and pass it to the Daisi:
 
 ```python
 img = Image.open("busystreet.png")
 img.load()
 
-original_image, result_image = yolo_object_detection.yolo(img).value
+yolo_result = yolo_object_detection.yolo(img).value
 ```
 
-And finally, let's render the images!
+And finally, let's render the result!
 
 ```python
-original_image.show()
-result_image.show()
+yolo_result.show()
 ```
 
-![](cat-objects.jpeg)
+![](busystreet-objects.jpeg)
 
 ## Running the Streamlit App
 

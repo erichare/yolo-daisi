@@ -1,13 +1,10 @@
-import scipy
 import os
 import streamlit as st
 import numpy as np
 import tempfile
 import uuid
-import base64
 
 from PIL import Image
-from io import BytesIO
 
 from yolov6.core.inferer import Inferer
 
@@ -61,14 +58,13 @@ def yolo(image: np.ndarray=None):
                   agnostic_nms=False, max_det=1000, save_dir=tmpdir, 
                   save_txt=True, save_img=True, hide_labels=False, hide_conf=False)
     
-    result_img = Image.open(os.path.join(tmpdir, os.path.basename(source)))
-    result_img.load()
+    yolo_result = Image.open(os.path.join(tmpdir, os.path.basename(source)))
+    yolo_result.load()
 
-    return image, result_img
+    return yolo_result
 
 if __name__ == "__main__":
     st.title("Yolo V6 Model")
-
     st.write("This Daisi allows you to provide an image, and one of the most advanced Object Detection algorithms available will try to classify it for you. Upload your data to get started!")
     
     with st.sidebar:
@@ -79,8 +75,7 @@ if __name__ == "__main__":
     else:
         file_name = uploaded_file.name
 
-    with st.expander("Show PyDaisi Code"):
-        st.markdown('## Calling with PyDaisi')
+    with st.expander("Inference with PyDaisi"):
         st.markdown(f"""
         ```python
         import pydaisi as pyd
@@ -91,14 +86,11 @@ if __name__ == "__main__":
         img = Image.open("{file_name}")
         img.load()
 
-        original_image, result_image = yolo_object_detection.yolo(img).value
-
-        original_image.show()
-        result_image.show()
+        yolo_result = yolo_object_detection.yolo(img).value
+        yolo_result.show()
         ```
         """)
 
-    original_image, result_image = yolo(uploaded_file)
+    yolo_result = yolo(uploaded_file)
 
-    st.image(original_image, caption='Original Image')
-    st.image(result_image, caption='Objects Detected')
+    st.image(yolo_result, caption='Objects Detected')
