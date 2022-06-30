@@ -25,7 +25,8 @@ We simply load the Image and pass it to the Daisi:
 img = Image.open("busystreet.png")
 img.load()
 
-yolo_result = yolo_object_detection.yolo(img).value
+yolo_result, labels_df = yolo_object_detection.yolo(img, return_type=["Image", "Labels"]).value
+# Or, labels_df = yolo_object_detection.yolo(img, return_type=["Labels"]).value
 ```
 
 And finally, let's render the result!
