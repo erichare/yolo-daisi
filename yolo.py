@@ -45,13 +45,18 @@ def yolo(image: np.ndarray=None):
     if image.mode != 'RGB':
         image = image.convert('RGB')
 
+    # Resize the image to the max dimensions
+    new_width  = 768
+    new_height = new_width * image.size[1] / image.size[0] 
+    image = image.resize((new_width, new_height), Image.ANTIALIAS)
+
     # Write the image
     source = os.path.join(tmpdir, source_name)
     image.save(source)
         
     # Streamlit
     inferer = Inferer(source, weights, device="", yaml="coco.yaml", 
-                      img_size=1280, half=False)
+                      img_size=new_width, half=False)
     inferer.infer(conf_thres=.25, iou_thres=.45, classes=None, 
                   agnostic_nms=False, max_det=1000, save_dir=tmpdir, 
                   save_txt=True, save_img=True, hide_labels=False, hide_conf=False)
