@@ -28,8 +28,8 @@ def yolo(image: np.ndarray=None, return_type: list=["Image", "Labels"]):
     objects overlayed, and/or a dataframe containing the labeling info
     that is derived from the algorithm
 
-    :param image np.ndarray: The image to analyze
-    :param return_type list: The list of things to return
+    :param np.ndarray image: The image to analyze
+    :param list return_type: The list of things to return
     
     :return: Results of the Yolo Algorithm
     '''
