@@ -3,7 +3,7 @@ torchvision
 torch
 numpy
 thop
-streamlit
+streamlit #
 pycocotools
 tqdm
 addict
